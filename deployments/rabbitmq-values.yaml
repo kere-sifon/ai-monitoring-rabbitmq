@@ -1,0 +1,31 @@
+# RabbitMQ Helm values for AI Monitoring (log-ingestion, log-processor)
+
+global:
+  security:
+    allowInsecureImages: true
+image:
+  repository: bitnamilegacy/rabbitmq
+  tag: "4.1.3-debian-12-r1"
+volumePermissions:
+  enabled: false
+  image:
+    repository: bitnamilegacy/os-shell
+    tag: "12-debian-12-r50"
+
+fullnameOverride: rabbitmq
+
+auth:
+  username: user
+  existingPasswordSecret: ai-monitoring-secrets
+  existingSecretPasswordKey: rabbitmq-password
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+persistence:
+  enabled: false
